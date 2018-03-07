@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="ICEGPS 2017/05/27 15:09" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.icegps.com">
+      <text>ICEGPS 610</text>
+    </link>
+    <time>2017-06-02T03:01:30Z</time>
+    <bounds maxlat="22.70731400" maxlon="114.24908600" minlat="22.70731400" minlon="114.24084700"/>
+  </metadata>
+
+  <rte>
+     <name>ttt1</name>
+     <rtept lat="22.70473515"  lon="114.24357230">
+       <ele>0.00000</ele>
+       <time>2016-06-24T04:12:14Z</time>
+     <name>P000W</name>
+       <cmt></cmt>
+       <desc>2016-06-24 04:12</desc>
+       <sym>0</sym>
+     </rtept>
+     <rtept lat="22.70474350"  lon="114.24361183">
+       <ele>73.200</ele>
+       <time>2016-06-24T04:19:08Z</time>
+     <name>P001</name>
+       <cmt></cmt>
+       <desc>2016-06-24 04:19</desc>
+       <sym>0</sym>
+     </rtept>
+     <rtept lat="22.70474833"  lon="114.24360223">
+       <ele>66.600</ele>
+       <time>2016-06-24T04:19:08Z</time>
+     <name>P001</name>
+       <cmt></cmt>
+       <desc>2016-06-24 04:19</desc>
+       <sym>0</sym>
+     </rtept>
+     </rte></gpx>

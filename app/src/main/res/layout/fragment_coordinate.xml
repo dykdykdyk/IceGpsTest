@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary" />
+    <include
+        layout="@layout/item_coordinate_container"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_weight="1"></include>
+
+    <include
+        layout="@layout/title_bottom_coordi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"></include>
+
+</LinearLayout>

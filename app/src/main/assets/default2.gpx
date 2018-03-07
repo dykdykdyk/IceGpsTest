@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="ICEGPS 2016.03.17" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.garmin.com">
+      <text>Garmin International</text>
+    </link>
+    <time>1970-01-01T00:00:00Z</time>
+    <bounds maxlat="0.0000000" maxlon="0.0000000" minlat="0.0000000" minlon="0.0000000"/>
+  </metadata>
+  <wpt lat="22.70476317" lon="114.24359850">
+    <ele>0.000</ele>
+    <time>2016-08-11T07:49:52Z</time>
+    <name>P000</name>
+    <cmt></cmt>
+    <desc>2016-08-11 07:49</desc>
+    <sym>26</sym>
+  </wpt>
+  <wpt lat="22.70474050" lon="114.24359283">
+    <ele>70.700</ele>
+    <time>2016-08-11T10:21:20Z</time>
+    <name>P00p</name>
+    <cmt></cmt>
+    <desc>2016-08-11 10:21</desc>
+    <sym>0</sym>
+  </wpt></gpx>

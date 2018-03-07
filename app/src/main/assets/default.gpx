@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="ICEGPS 2016.03.17" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.garmin.com">
+      <text>Garmin International</text>
+    </link>
+    <time>1970-01-01T00:00:00Z</time>
+    <bounds maxlat="0.0000000" maxlon="0.0000000" minlat="0.0000000" minlon="0.0000000"/>
+  </metadata>
+  <wpt lat="38.054784094999995" lon="106.22065767833334">
+    <ele>1076.6938</ele>
+    <time>2016-08-11T07:49:52Z</time>
+    <name>P000</name>
+    <cmt></cmt>
+    <desc>2016-08-11 07:49</desc>
+    <sym>26</sym>
+  </wpt>
+  <wpt lat="38.054784094999995" lon="106.22066767833334">
+    <ele>1000.6938</ele>
+    <time>2016-08-11T10:21:20Z</time>
+    <name>P00p</name>
+    <cmt></cmt>
+    <desc>2016-08-11 10:21</desc>
+    <sym>0</sym>
+  </wpt>
+  <wpt lat="33.3333333333" lon="114.2436150">
+    <ele>74.5000000</ele>
+    <time>2016-08-10T07:00:28Z</time>
+    <name>P002</name>
+    <cmt></cmt>
+    <desc>2016-08-10 07:00</desc>
+    <sym>0</sym>
+  </wpt>
+  <wpt lat="44.44444444444" lon="114.2436970">
+    <ele>66.8000000</ele>
+    <time>2016-08-11T10:21:41Z</time>
+    <name>P003</name>
+    <cmt></cmt>
+    <desc>2016-08-11 10:21</desc>
+    <sym>7</sym>
+  </wpt>
+  <wpt lat="55.55555555555" lon="114.2435940">
+    <ele>64.3000000</ele>
+    <time>2016-08-11T09:26:01Z</time>
+    <name>P004</name>
+    <cmt></cmt>
+    <desc>2016-08-11 09:26</desc>
+    <sym>28</sym>
+  </wpt>
+  <wpt lat="66.66666666666" lon="114.2435940">
+    <ele>63.1000000</ele>
+    <time>2016-08-11T10:22:06Z</time>
+    <name>P005</name>
+    <cmt></cmt>
+    <desc>2016-08-11 10:22</desc>
+    <sym>42</sym>
+  </wpt>
+  <wpt lat="77.77777777777777" lon="114.2435960">
+    <ele>63.5000000</ele>
+    <time>2016-08-11T10:21:53Z</time>
+    <name>P006ww</name>
+    <cmt></cmt>
+    <desc>2016-08-11 10:21</desc>
+    <sym>0</sym>
+  </wpt></gpx>

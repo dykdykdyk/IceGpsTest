@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sll"
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <!--<View-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:layout_alignParentTop="true"/>-->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentLeft="true"/>
+    <View
+        android:layout_width="50dp"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"/>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/item_recycle_name"
+        android:layout_width="50dp"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:text="@string/point_name" />
+</RelativeLayout>
