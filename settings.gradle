@@ -1,1 +1,1 @@
-include ':app', ':FastBleLib', ':library'
+include ':app', ':FastBleLib', ':library', ':testwechat'
