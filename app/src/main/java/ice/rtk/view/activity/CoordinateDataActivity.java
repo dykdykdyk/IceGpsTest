@@ -1,34 +1,23 @@
-package ice.rtk.view.coordinate_data;
+package ice.rtk.view.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import ice.rtk.R;
 import ice.rtk.view.base.BaseActivity;
-import ice.rtk.view.coordinate_data.fragment.Fragment_Lines;
-import ice.rtk.view.coordinate_data.fragment.Fragment_Coordinate;
-import ice.rtk.view.coordinate_data.fragment.Fragment_Point;
+import ice.rtk.view.fragment.Fragment_Lines;
+import ice.rtk.view.fragment.Fragment_Coordinate;
+import ice.rtk.view.fragment.Fragment_Point;
 
-public class Activity_Coordinate_data extends BaseActivity implements OnClickListener {
+public class CoordinateDataActivity extends BaseActivity implements OnClickListener {
     Fragment_Lines mFragment_control;
     Fragment_Coordinate mFragment_coordinate;
     Fragment_Point mFragment_lofting;

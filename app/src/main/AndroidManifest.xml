@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".view.coordinate_data.Activity_Coordinate_data"-->
+        <!--<activity android:name=".view.coordinate_dCoordinateDataActivitydata"-->
             <!--android:windowSoftInputMode="adjustResize">-->
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
@@ -41,11 +41,11 @@
             <!--</intent-filter>-->
         <!--</activity>-->
         <activity android:name=".view.activity.BleActivity"></activity>
-        <activity android:name=".view.LinesView.LinesActivity"></activity>
-        <activity android:name=".view.PointView.PointActivity"></activity>
-        <activity android:name=".view.PointView.MapLookPointActivity"></activity>
-        <activity android:name=".view.coordinate_data.Activity_Coordinate_data"></activity>
-        <activity android:name=".view.coordinate_data.Activity_Addpoint"></activity>
+        <activity android:name=".view.activity.LinesLoftingActivity"></activity>
+        <activity android:name=".view.activity.PointLoftingActivity"></activity>
+        <activity android:name=".view.activity.PointShowActivity"></activity>
+        <activity android:name=".view.activity.CoordinateDataActivity"></activity>
+        <activity android:name=".view.activity.AddPointActivity"></activity>
         <activity
             android:name="com.nononsenseapps.filepicker.FilePickerActivity"
             android:label="@string/app_name"

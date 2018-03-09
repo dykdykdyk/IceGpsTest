@@ -1,4 +1,4 @@
-package ice.rtk.view.coordinate_data;
+package ice.rtk.view.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,18 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.pop.android.common.util.ToastUtils;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ice.rtk.R;
 import ice.rtk.Utils.LogUtil;
 import ice.rtk.Utils.ToastUtil;
 import ice.rtk.Utils.Util;
+import ice.rtk.bean.Point_List;
 import ice.rtk.view.base.BaseActivity;
 
-public class Activity_Addpoint extends BaseActivity {
+public class AddPointActivity extends BaseActivity {
 
 
     @BindView(R.id.loft_point)

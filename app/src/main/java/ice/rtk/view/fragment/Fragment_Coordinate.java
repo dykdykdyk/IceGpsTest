@@ -1,31 +1,23 @@
-package ice.rtk.view.coordinate_data.fragment;
+package ice.rtk.view.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import ice.rtk.R;
-import ice.rtk.Utils.LogUtil;
 import ice.rtk.view.base.BaseFragment;
-import ice.rtk.view.coordinate_data.Point_List;
-import ice.rtk.view.coordinate_data.Point_Name;
-import ice.rtk.view.coordinate_data.Recycle_list_Adapter;
-import ice.rtk.view.coordinate_data.Recycle_nam_Adapter;
-import ice.rtk.view.coordinate_data.customView.IHorizontalScrollView;
+import ice.rtk.bean.Point_List;
+import ice.rtk.bean.Point_Name;
+import ice.rtk.view.adapter.Recycle_list_Adapter;
+import ice.rtk.view.adapter.Recycle_nam_Adapter;
+import ice.rtk.view.customview.IHorizontalScrollView;
 
 
 /**
@@ -59,6 +51,7 @@ public class Fragment_Coordinate extends BaseFragment {
     int currentScroll;
     Recycle_nam_Adapter recycle_nam_adapter;
     Recycle_list_Adapter recycle_list_adapter;
+    boolean ViewDeath=false;
     @Override
     protected View childImpl() {
         return View.inflate(getActivity(), R.layout.fragment_coordinate, null);
@@ -141,22 +134,35 @@ public class Fragment_Coordinate extends BaseFragment {
 
             @Override
             public void onScrollToLeftEdge() {
-                imageRight.setVisibility(View.VISIBLE);
-                imageLeft.setVisibility(View.INVISIBLE);
+                if(ViewDeath){
+                    imageRight.setVisibility(View.VISIBLE);
+                    imageLeft.setVisibility(View.INVISIBLE);
+                }
+
             }
 
             @Override
             public void onScrollToRightEdge() {
-                imageLeft.setVisibility(View.VISIBLE);
-                imageRight.setVisibility(View.INVISIBLE);
+                if (ViewDeath) {
+                    imageLeft.setVisibility(View.VISIBLE);
+                    imageRight.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
             public void onScrollToMiddle() {
-                imageLeft.setVisibility(View.VISIBLE);
-                imageRight.setVisibility(View.VISIBLE);
+                if (ViewDeath) {
+                    imageLeft.setVisibility(View.VISIBLE);
+                    imageRight.setVisibility(View.VISIBLE);
+                }
             }
         });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ViewDeath =true;
     }
 
     private void initname() {

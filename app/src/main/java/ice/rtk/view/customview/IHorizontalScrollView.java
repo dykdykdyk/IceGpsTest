@@ -1,4 +1,4 @@
-package ice.rtk.view.coordinate_data.customView;
+package ice.rtk.view.customview;
 
 import android.content.Context;
 import android.graphics.Rect;

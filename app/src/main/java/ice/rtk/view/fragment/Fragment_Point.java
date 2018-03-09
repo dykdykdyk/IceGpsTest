@@ -1,4 +1,4 @@
-package ice.rtk.view.coordinate_data.fragment;
+package ice.rtk.view.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,24 +41,23 @@ import ice.rtk.Utils.PopupWindow.CommonPopupWindow;
 import ice.rtk.Utils.Util;
 import ice.rtk.Utils.gpxparser.GPXParser;
 import ice.rtk.Utils.gpxparser.modal.GPX;
-import ice.rtk.Utils.gpxparser.modal.Route;
 import ice.rtk.Utils.gpxparser.modal.Waypoint;
-import ice.rtk.view.LinesView.LinesActivity;
-import ice.rtk.view.PointView.PointActivity;
+import ice.rtk.view.activity.AddPointActivity;
+import ice.rtk.view.activity.PointLoftingActivity;
+import ice.rtk.view.activity.PointShowActivity;
 import ice.rtk.view.base.BaseFragment;
-import ice.rtk.view.coordinate_data.Activity_Addpoint;
-import ice.rtk.view.coordinate_data.Point_List;
-import ice.rtk.view.coordinate_data.Point_Name;
-import ice.rtk.view.coordinate_data.Recycle_list_Adapter;
-import ice.rtk.view.coordinate_data.Recycle_nam_Adapter;
-import ice.rtk.view.coordinate_data.customView.IHorizontalScrollView;
+import ice.rtk.bean.Point_List;
+import ice.rtk.bean.Point_Name;
+import ice.rtk.view.adapter.Recycle_list_Adapter;
+import ice.rtk.view.adapter.Recycle_nam_Adapter;
+import ice.rtk.view.customview.IHorizontalScrollView;
 
 /**
  * 作者: 邓洋康 on 2018/01/24 21:41
  * 作用:XXX
  */
 
-public class Fragment_Lines extends BaseFragment implements View.OnClickListener {
+public class Fragment_Point extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.recycle_name)
     RecyclerView mRecycleName;
     @BindView(R.id.image_left)
@@ -85,15 +84,11 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
     TextView edit;
     @BindView(R.id.title_edit_or_delete)
     LinearLayout titleEditOrDelete;
-    @BindView(R.id.insert_pre)
-    TextView insertPre;
-    @BindView(R.id.insert_after)
-    TextView insertAfter;
-    @BindView(R.id.lofting_point)
-    TextView loftingPoint;
+    Unbinder unbinder;
+    @BindView(R.id.loft)
+    TextView loft;
     @BindView(R.id.look)
     TextView look;
-    Unbinder unbinder;
 
     private CommonPopupWindow popupWindow;
     ArrayList<Point_Name> name;
@@ -106,15 +101,13 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
     private static final int FILE_CODE = 2;
     private static final int BACK_POINT_LIST = 1;
     private static final int BACK_POINT_LIST_EDIT = 3;
-    private static final int INSERT_POINT_PRE = 4;
-    private static final int INSERT_POINT_AFTER = 5;
 
     //recycle_list_adapter选中的位置
     private int selece_position = 0;
 
     @Override
     protected View childImpl() {
-        return View.inflate(getActivity(), R.layout.fragment_lines, null);
+        return View.inflate(getActivity(), R.layout.fragment_point, null);
     }
 
     @Override
@@ -256,7 +249,7 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_point:
-                startActivityForResult(new Intent(getActivity(), Activity_Addpoint.class), BACK_POINT_LIST);
+                startActivityForResult(new Intent(getActivity(), AddPointActivity.class), BACK_POINT_LIST);
                 break;
             case R.id.open:
 //                startActivity(new Intent(getActivity(), FileActivity.class));
@@ -316,13 +309,13 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
                                         add.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                startActivity(Activity_Addpoint.class);
+                                                startActivity(AddPointActivity.class);
                                             }
                                         });
                                         create_new_file.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-//                                                startActivity(Activity_Addpoint.class);
+//                                                startActivity(AddPointActivity.class);
                                                 showDia();
                                             }
                                         });
@@ -340,20 +333,20 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
         View view = getLayoutInflater().inflate(R.layout.editdata, null);
         final EditText editText = view.findViewById(R.id.edit);
         ad.setView(view);
-        editText.setText("Line1");
+        editText.setText("point1");
         ad.setTitle(getResources().getString(R.string.create_new_file))
-                .setMessage("请输入文件名？")
+                .setMessage("你确定要更改数据吗?")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            File file = new File(Util.FILESPATHLINES + editText.getText().toString() + ".gpx");
+                            File file = new File(Util.FILESPATHPOINT + editText.getText().toString() + ".gpx");
                             if (!file.exists()) {
                                 file.getParentFile().mkdirs();
                             }
                             file.createNewFile();
                             if (file.length() == 0) {
-                                writeData(file, editText.getText().toString());
+                                writeData(file);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -363,17 +356,13 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
                 .setNegativeButton("取消", null).create().show();
     }
 
-    /**
-     * @param file     创建的航线文件名
-     * @param linename 默认航线里面的航线名和文件名字相同
-     */
-    public void writeData(File file, String linename) {
+    public void writeData(File file) {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
             fw = new FileWriter(file, true);
             bw = new BufferedWriter(fw);
-            bw.write(Util.CreateLinesHead(linename));
+            bw.write(Util.CreatePointFileHead());
             bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -417,7 +406,6 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
         } else if (requestCode == BACK_POINT_LIST && resultCode == Activity.RESULT_FIRST_USER) {
             Point_List point_list = (Point_List) intent.getSerializableExtra(Util.ADD_POINT_BUNDLE);
             Point_Name point_name = new Point_Name(intent.getExtras().getString(Util.ADD_POINT_NAME));
-
             name.add(point_name);
             recycle_nam_adapter.notifyItemInserted(name.size() - 1);
             //第四项 默认选择添加时间
@@ -433,16 +421,17 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
             float lon = 144.23234324f;
             float ele = 60.8f;
             //添加点 到当前文件 默认插入到最后点的最后面
-            String str = "<rtept  lat=\"" + point_list.getLat() + "" + "\"  lon=\"" + point_list.getLon() + "" + "\">\n" +
-                    "       <ele>" + ele + "</ele>\n" +
-                    "       <time>" + time + "</time>\n" +
-                    "       <name>P000W</name>\n" +
-                    "       <cmt></cmt>\n" +
-                    "       <desc>2016-06-24 04:12</desc>\n" +
-                    "       <sym>0</sym>\n" +
-                    "     </rtept>\n" +
-                    "</rte></gpx>\n";
-            Util.AddData(str, list.get(selece_position).getLat(), 1, file);
+            String str = "\n" +
+                    "  <wpt lat=\"" + point_list.getLat() + "" + "\"  lon=\"" + point_list.getLon() + "" + "\">\n" +
+                    "  <ele>" + ele + "</ele>\n" +
+                    "  <time>" + time + "</time>\n" +
+                    "  <name>" + point_name.getName() + "</name>\n" +
+                    "  <cmt></cmt>\n" +
+                    "  <desc>" + point_list.getDiscript() + "</desc>\n" +
+                    "  <sym>0</sym>\n" +
+                    "  </wpt>\n" +
+                    "</gpx>";
+            Util.addtoPointFile(str, file);
             //编辑的
         } else if (requestCode == BACK_POINT_LIST_EDIT && resultCode == Activity.RESULT_FIRST_USER) {
             if (intent == null)
@@ -459,53 +448,8 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
             //第四项 默认选择添加时间
             list.set(selece_position, point_list);
             recycle_list_adapter.set(selece_position, point_list);
-        } else if (requestCode == INSERT_POINT_PRE && resultCode == Activity.RESULT_FIRST_USER) {
-            if (intent == null)
-                return;
-            float ele = 60.8f;
-            String time = Util.getDataTZ();
-//            if(time==null){
-            Point_List point_list = (Point_List) intent.getSerializableExtra(Util.ADD_POINT_BUNDLE);
-            Point_Name point_name = new Point_Name(intent.getExtras().getString(Util.ADD_POINT_NAME));
-            String str = "<rtept  lat=\"" + point_list.getLat() + "" + "\"  lon=\"" + point_list.getLon() + "" + "\">\n" +
-                    "       <ele>" + ele + "</ele>\n" +
-                    "       <time>" + time + "</time>\n" +
-                    "       <name>P000W</name>\n" +
-                    "       <cmt></cmt>\n" +
-                    "       <desc>2016-06-24 04:12</desc>\n" +
-                    "       <sym>0</sym>\n" +
-                    "     </rtept>\n";
-            Util.AddData(str, list.get(selece_position).getLat(), 0, file);
-
-//                name.add(selece_position,point_name);
-//                list.add(selece_position, point_list);
-            recycle_nam_adapter.add(selece_position, point_name);
-            recycle_list_adapter.add(selece_position, point_list);
-
-            LogUtil.e(getClass(), selece_position + ",selece_position");
-        } else if (requestCode == INSERT_POINT_AFTER && resultCode == Activity.RESULT_FIRST_USER) {
-            if (intent == null)
-                return;
-            float ele = 60.8f;
-            String time = Util.getDataTZ();
-//            if(time==null){
-            Point_List point_list = (Point_List) intent.getSerializableExtra(Util.ADD_POINT_BUNDLE);
-            Point_Name point_name = new Point_Name(intent.getExtras().getString(Util.ADD_POINT_NAME));
-            String str = "<rtept  lat=\"" + point_list.getLat() + "" + "\"  lon=\"" + point_list.getLon() + "" + "\">\n" +
-                    "       <ele>" + ele + "</ele>\n" +
-                    "       <time>" + time + "</time>\n" +
-                    "       <name>P000W</name>\n" +
-                    "       <cmt></cmt>\n" +
-                    "       <desc>2016-06-24 04:12</desc>\n" +
-                    "       <sym>0</sym>\n" +
-                    "     </rtept>\n";
-            Util.AddData(str, list.get(selece_position).getLat(), 1, file);
-//            name.add(selece_position + 1, point_name);
-//            list.add(selece_position + 1, point_list);
-            recycle_nam_adapter.add(selece_position + 1, point_name);
-            recycle_list_adapter.add(selece_position + 1, point_list);
-            LogUtil.i(getClass(), "requestCode:" + requestCode + ",resultCode:" + resultCode + ",intent:" + intent);
         }
+        LogUtil.i(getClass(), "requestCode:" + requestCode + ",resultCode:" + resultCode + ",intent:" + intent);
     }
 
     private void ParseFile(File file) {
@@ -518,18 +462,15 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
             ArrayList<Waypoint> arrayList = gpx.getWaypoints();
             //清空点
             initAdapter();
-            for (Route way : gpx.getRoutes()) {
-                for (Waypoint waypoint : way.getRoutePoints()) {
-                    Log.i("TAG", "waypoint:" + waypoint);
-                    Point_Name point_name = new Point_Name(waypoint.getName());
-                    Point_List point_list = new Point_List(waypoint.getLatitude() + "", waypoint.getLongitude() + "", waypoint.getElevation() + "",
-                            waypoint.getTime().toString(), waypoint.getDescription());
-                    name.add(point_name);
-                    recycle_nam_adapter.notifyItemInserted(name.size() - 1);
-                    //第四项 默认选择添加时间
-                    list.add(point_list);
-                    recycle_list_adapter.notifyItemInserted(list.size() - 1);
-                }
+            for (Waypoint waypoint : arrayList) {
+                Point_Name point_name = new Point_Name(waypoint.getName());
+                Point_List point_list = new Point_List(waypoint.getLatitude() + "", waypoint.getLongitude() + "", waypoint.getElevation() + "",
+                        waypoint.getTime().toString(), waypoint.getDescription());
+                name.add(point_name);
+                recycle_nam_adapter.notifyItemInserted(name.size() - 1);
+                //第四项 默认选择添加时间
+                list.add(point_list);
+                recycle_list_adapter.notifyItemInserted(list.size() - 1);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -549,7 +490,21 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
 
     }
 
-    @OnClick({R.id.delete, R.id.edit, R.id.insert_pre, R.id.insert_after,R.id.lofting_point, R.id.look})
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick({R.id.delete, R.id.edit,R.id.loft, R.id.look})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.delete:
@@ -576,54 +531,28 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
                 recycle_list_adapter.setBackColor();
                 Point_Name point_name = name.get(selece_position);
                 Point_List point_list = list.get(selece_position);
-                Intent intent = new Intent(getActivity(), Activity_Addpoint.class);
+                Intent intent = new Intent(getActivity(), AddPointActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Util.ADD_POINT_BUNDLE, point_list);
                 bundle.putString(Util.ADD_POINT_NAME, point_name.getName());
                 intent.putExtras(bundle);
+
                 recycle_list_adapter.setBackColor();
                 startActivityForResult(intent, BACK_POINT_LIST_EDIT);
                 break;
-
-            case R.id.insert_pre:
-                titleBottom.setVisibility(View.VISIBLE);
-                titleEditOrDelete.setVisibility(View.GONE);
-                recycle_list_adapter.setBackColor();
-//                Point_Name point_name_pre = name.get(selece_position);
-//                Point_List point_list_pre = list.get(selece_position);
-                Intent intent_pre = new Intent(getActivity(), Activity_Addpoint.class);
-                Bundle bundle_pre = new Bundle();
-//                bundle_pre.putSerializable(Util.ADD_POINT_BUNDLE, point_list_pre);
-//                bundle_pre.putString(Util.ADD_POINT_NAME, point_name_pre.getName());
-                bundle_pre.putString(Util.INSERT_POINT, Util.INSERT_POINT_PRE);
-                intent_pre.putExtras(bundle_pre);
-                recycle_list_adapter.setBackColor();
-                startActivityForResult(intent_pre, INSERT_POINT_PRE);
-                break;
-            case R.id.insert_after:
-                titleBottom.setVisibility(View.VISIBLE);
-                titleEditOrDelete.setVisibility(View.GONE);
-                recycle_list_adapter.setBackColor();
-//                Point_Name point_name_after = name.get(selece_position);
-//                Point_List point_list_after = list.get(selece_position);
-                Intent intent_after = new Intent(getActivity(), Activity_Addpoint.class);
-                Bundle bundle_after = new Bundle();
-//                bundle_after.putSerializable(Util.ADD_POINT_BUNDLE, point_list_after);
-//                bundle_after.putString(Util.ADD_POINT_NAME, point_name_after.getName());
-                bundle_after.putString(Util.INSERT_POINT, Util.INSERT_POINT_AFTER);
-                intent_after.putExtras(bundle_after);
-                recycle_list_adapter.setBackColor();
-                startActivityForResult(intent_after, INSERT_POINT_AFTER);
-                break;
-
-            case R.id.lofting_point:
-                Intent inten1 =new Intent(getActivity(), LinesActivity.class);
+            case R.id.loft:
+                Intent inten1 =new Intent(getActivity(), PointLoftingActivity.class);
                 inten1.putExtra(Util.DRAW_POINT_LAT, list.get(selece_position).getLat());
                 inten1.putExtra(Util.DRAW_POINT_LON,list.get(selece_position).getLon());
                 inten1.putExtra(Util.DRAW_POINT_ELE,list.get(selece_position).getEle());
                 startActivity(inten1);
                 break;
             case R.id.look:
+                Intent intenlook =new Intent(getActivity(), PointShowActivity.class);
+                intenlook.putExtra(Util.DRAW_POINT_LAT, list.get(selece_position).getLat());
+                intenlook.putExtra(Util.DRAW_POINT_LON,list.get(selece_position).getLon());
+                intenlook.putExtra(Util.DRAW_POINT_ELE,list.get(selece_position).getEle());
+                startActivity(intenlook);
                 break;
         }
     }
@@ -640,19 +569,5 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
             recycle_list_adapter.setBackColor();
             return true;
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

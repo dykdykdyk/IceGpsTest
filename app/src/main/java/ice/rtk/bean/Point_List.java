@@ -1,4 +1,4 @@
-package ice.rtk.view.coordinate_data;
+package ice.rtk.bean;
 
 import java.io.Serializable;
 

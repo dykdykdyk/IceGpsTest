@@ -21,10 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ice.rtk.R;
 import ice.rtk.Utils.Util;
-import ice.rtk.view.LinesView.LinesActivity;
-import ice.rtk.view.PointView.PointActivity;
 import ice.rtk.view.base.BaseActivity;
-import ice.rtk.view.coordinate_data.Activity_Coordinate_data;
 import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity {
@@ -93,13 +90,13 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 switch(position){
                     case 0:
-                        startActivity(PointActivity.class);
+                        startActivity(PointLoftingActivity.class);
                         break;
                     case 1:
-                        startActivity(LinesActivity.class);
+                        startActivity(LinesLoftingActivity.class);
                         break;
                     case 2:
-                        startActivity(Activity_Coordinate_data.class);
+                        startActivity(CoordinateDataActivity.class);
                         break;
                     case 3://blue
                         startActivity(BleActivity.class);

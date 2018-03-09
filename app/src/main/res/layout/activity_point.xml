@@ -14,7 +14,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <ice.rtk.view.PointView.MapView
+            <ice.rtk.view.customview.PointLoftingView
                 android:id="@+id/mapview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

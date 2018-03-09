@@ -24,7 +24,7 @@
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_prev_d"/>
-        <ice.rtk.view.coordinate_data.customView.IHorizontalScrollView
+        <ice.rtk.view.customview.IHorizontalScrollView
             android:id="@+id/hsv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +39,7 @@
                 android:scrollbars="none"
                 android:listSelector="@android:color/transparent">
             </android.support.v7.widget.RecyclerView>
-        </ice.rtk.view.coordinate_data.customView.IHorizontalScrollView>
+        </ice.rtk.view.customview.IHorizontalScrollView>
         <ImageView
             android:visibility="visible"
             android:layout_alignParentRight="true"

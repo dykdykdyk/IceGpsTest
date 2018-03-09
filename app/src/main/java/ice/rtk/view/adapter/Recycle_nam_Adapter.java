@@ -1,4 +1,4 @@
-package ice.rtk.view.coordinate_data;
+package ice.rtk.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ice.rtk.R;
+import ice.rtk.bean.Point_Name;
 
 /**
  * Created by Administrator on 2018/1/24.

@@ -1,18 +1,17 @@
-package ice.rtk.view.coordinate_data;
+package ice.rtk.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ice.rtk.R;
 import ice.rtk.Utils.LogUtil;
+import ice.rtk.bean.Point_List;
 
 /**
  * Created by Administrator on 2018/1/24.

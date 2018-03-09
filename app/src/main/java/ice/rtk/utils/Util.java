@@ -1,6 +1,5 @@
 package ice.rtk.Utils;
 
-import android.app.Activity;
 import android.os.Environment;
 import android.view.View;
 
@@ -8,7 +7,6 @@ import android.view.View;
 import java.io.BufferedReader;
 import java.io.CharArrayWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,9 +22,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ice.rtk.view.coordinate_data.Activity_Addpoint;
-import ice.rtk.view.coordinate_data.Point_List;
-import ice.rtk.view.coordinate_data.Point_Name;
+import ice.rtk.bean.Point_List;
+import ice.rtk.bean.Point_Name;
 
 public class Util {
     public static String APP_SDCARD_PATH = "icegps/";
