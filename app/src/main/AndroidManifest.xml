@@ -41,9 +41,9 @@
             <!--</intent-filter>-->
         <!--</activity>-->
         <activity android:name=".view.activity.BleActivity"></activity>
-        <activity android:name=".view.LinesView.LinesActivity"></activity>
-        <activity android:name=".view.PointView.PointActivity"></activity>
-        <activity android:name=".view.PointView.MapLookPointActivity"></activity>
+        <activity android:name=".view.activity.LinesLoftingActivity"></activity>
+        <activity android:name=".view.activity.PointLoftingActivity"></activity>
+        <activity android:name=".view.activity.MapLookPointActivity"></activity>
         <activity android:name=".view.coordinate_data.Activity_Coordinate_data"></activity>
         <activity android:name=".view.coordinate_data.Activity_Addpoint"></activity>
         <activity

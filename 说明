@@ -1,0 +1,50 @@
+1.FastBleLib是ble的操作框架
+2.library是文件管理的框架
+3.包名定义规则,view下的每个模块分别是一个功能
+驼峰命名法：又称小驼峰命名法。除了首个单词首字母小写除外，其余所有单词所有首字母都要大写。
+
+包名一律小写
+建议采用如下规则：【com】.【公司名/组织名】.【项目名称】.【模块名】
+
+比如：com.jacksen.mvp.demo。然后在这个目录下根据业务逻辑进行分层。
+
+常见的包分层结构如下：
+com.xxx.xxx.view –> 自定义view 或者是View接口
+com.xxx.xxx.activities –> activity类
+com.xxx.xxx.fragments –> fragment类
+com.xxx.xxx.adapter –> 适配器相关
+com.xxx.xxx.utils –> 公共工具类
+com.xxx.xxx.bean –> 实体类
+com.xxx.xx.service –> service服务
+com.xxx.xxx.broadcast –> 广播接收器
+com.xxx.xxx.db –> 数据库操作类
+com.xxx.xxx.persenter –> 中间对象
+com.xxx.xxx.model –> 数据处理类
+
+类的命名规范
+Android中类的命名与JAVA开发采用一致的规范即可。
+大驼峰命名法，即所有单词首字母大写。
+Activity –> xxxActivity.java
+Application –> xxxApplication.java
+Fragment –> xxxFragment.java
+Service –> xxxService.java
+BroadcastReceiver –> xxxBroReceiver.java
+ContentProvider –> xxxProvider.java
+Adapter –> xxxAdapter.java
+Handler –> xxxHandler.java
+接口 –> xxxInter.java
+接口实现类 –> xxxImpl.java
+Persenter –> xxxPersenter.java
+公共父类 –> BaseActivity.java、BaseFragment.java、- BaseAdapter.java等
+util类 –> LogUtil.java
+数据库类 –> BaseSQLiteDBHelper.java
+采用驼峰命名规则。
+常量命名：
+全部单词采用大写，每个单词之间用“_”分割。
+public static final String API_URL = "http://apis.baidu.com/heweather/weather/free";
+方法的命名规范
+与java开发类似，采用驼峰命名规则。首单词首字母小写，其余单词首字母大写。尽量不要使用下划线。
+drawable目录下的命名规范
+全部单词小写，单词之间采用下划线分割。
+anim目录下的命名规范
+单词全部小写，单词之间采用下划线分割。

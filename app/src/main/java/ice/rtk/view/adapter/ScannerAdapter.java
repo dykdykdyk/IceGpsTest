@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.clj.fastble.data.BleDevice;
@@ -13,7 +12,6 @@ import com.clj.fastble.data.BleDevice;
 import java.util.ArrayList;
 
 import ice.rtk.R;
-import ice.rtk.Utils.Sort.DeviceShowHelper;
 
 
 /**

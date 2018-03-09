@@ -11,7 +11,7 @@ import java.util.List;
  * Created by 111 on 2018/1/15.
  */
 
-public class BleStatusCallback implements Callback{
+public class BleStatusCallback implements Callback {
 
 
     @Override
