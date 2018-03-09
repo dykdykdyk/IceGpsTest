@@ -1,9 +1,10 @@
-package ice.rtk.utils.foundsdk;
+package ice.rtk.Utils.FoundSdk;
 
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.qx.wz.exception.WzException;
 import com.qx.wz.sdk.rtcm.RtcmSnippet;
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-import ice.rtk.utils.LogUtil;
+import ice.rtk.Utils.LogUtil;
 
 /**
  * Created by Administrator on 2018/1/23.

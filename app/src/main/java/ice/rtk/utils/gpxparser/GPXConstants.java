@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser;
+package ice.rtk.Utils.gpxparser;
 
 public interface GPXConstants {
 

@@ -1,5 +1,5 @@
 
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ public class Route extends Extension {
     private String comment;
     private String description;
     private String src;
-    private HashSet<ice.rtk.utils.gpxparser.modal.Link> links;
+    private HashSet<ice.rtk.Utils.gpxparser.modal.Link> links;
     private int number;
 
     private String type;
@@ -153,15 +153,15 @@ public class Route extends Extension {
         routePoints.add(waypoint);
     }
 
-    public HashSet<ice.rtk.utils.gpxparser.modal.Link> getLinks() {
+    public HashSet<ice.rtk.Utils.gpxparser.modal.Link> getLinks() {
         return links;
     }
 
-    public void setLinks(HashSet<ice.rtk.utils.gpxparser.modal.Link> links) {
+    public void setLinks(HashSet<ice.rtk.Utils.gpxparser.modal.Link> links) {
         this.links = links;
     }
 
-    public void addLink(ice.rtk.utils.gpxparser.modal.Link link) {
+    public void addLink(ice.rtk.Utils.gpxparser.modal.Link link) {
         if (links == null) {
             links = new HashSet<>();
         }

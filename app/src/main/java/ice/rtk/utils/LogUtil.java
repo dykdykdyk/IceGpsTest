@@ -1,4 +1,4 @@
-package ice.rtk.utils;
+package ice.rtk.Utils;
 
 import android.util.Log;
 

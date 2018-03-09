@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 import java.util.ArrayList;
 
@@ -24,26 +24,26 @@ public class GPX extends Extension {
 	private String version = "1.1";
 
 	// Nodes
-	private ice.rtk.utils.gpxparser.modal.Metadata metadata;
-	private ArrayList<ice.rtk.utils.gpxparser.modal.Route> routes;
-	private ArrayList<ice.rtk.utils.gpxparser.modal.Track> tracks;
-	private ArrayList<ice.rtk.utils.gpxparser.modal.Waypoint> waypoints;
+	private ice.rtk.Utils.gpxparser.modal.Metadata metadata;
+	private ArrayList<ice.rtk.Utils.gpxparser.modal.Route> routes;
+	private ArrayList<ice.rtk.Utils.gpxparser.modal.Track> tracks;
+	private ArrayList<ice.rtk.Utils.gpxparser.modal.Waypoint> waypoints;
 
 	public GPX() {
 		this.waypoints = new ArrayList<>();
-		this.tracks = new ArrayList<ice.rtk.utils.gpxparser.modal.Track>();
-		this.routes = new ArrayList<ice.rtk.utils.gpxparser.modal.Route>();
+		this.tracks = new ArrayList<ice.rtk.Utils.gpxparser.modal.Track>();
+		this.routes = new ArrayList<ice.rtk.Utils.gpxparser.modal.Route>();
 	}
 
 	/**
 	 * Adds a new Route to a gpx object
 	 *
 	 * @param route
-	 *            a {@link ice.rtk.utils.gpxparser.modal.Route}
+	 *            a {@link ice.rtk.Utils.gpxparser.modal.Route}
 	 */
-	public void addRoute(ice.rtk.utils.gpxparser.modal.Route route) {
+	public void addRoute(ice.rtk.Utils.gpxparser.modal.Route route) {
 		if (this.routes == null) {
-			this.routes = new ArrayList<ice.rtk.utils.gpxparser.modal.Route>();
+			this.routes = new ArrayList<ice.rtk.Utils.gpxparser.modal.Route>();
 		}
 		this.routes.add(route);
 	}
@@ -52,11 +52,11 @@ public class GPX extends Extension {
 	 * Adds a new track to a gpx object
 	 *
 	 * @param track
-	 *            a {@link ice.rtk.utils.gpxparser.modal.Track}
+	 *            a {@link ice.rtk.Utils.gpxparser.modal.Track}
 	 */
-	public void addTrack(ice.rtk.utils.gpxparser.modal.Track track) {
+	public void addTrack(ice.rtk.Utils.gpxparser.modal.Track track) {
 		if (this.tracks == null) {
-			this.tracks = new ArrayList<ice.rtk.utils.gpxparser.modal.Track>();
+			this.tracks = new ArrayList<ice.rtk.Utils.gpxparser.modal.Track>();
 		}
 		this.tracks.add(track);
 	}
@@ -65,11 +65,11 @@ public class GPX extends Extension {
 	 * Adds a new waypoint to a gpx object
 	 *
 	 * @param waypoint
-	 *            a {@link ice.rtk.utils.gpxparser.modal.Waypoint}
+	 *            a {@link ice.rtk.Utils.gpxparser.modal.Waypoint}
 	 */
-	public void addWaypoint(ice.rtk.utils.gpxparser.modal.Waypoint waypoint) {
+	public void addWaypoint(ice.rtk.Utils.gpxparser.modal.Waypoint waypoint) {
 		if (this.waypoints == null) {
-			this.waypoints = new ArrayList<ice.rtk.utils.gpxparser.modal.Waypoint>();
+			this.waypoints = new ArrayList<ice.rtk.Utils.gpxparser.modal.Waypoint>();
 		}
 		this.waypoints.add(waypoint);
 
@@ -87,18 +87,18 @@ public class GPX extends Extension {
 	/**
 	 * Getter for the list of routes from a gpx object
 	 *
-	 * @return a HashSet of {@link ice.rtk.utils.gpxparser.modal.Route}
+	 * @return a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Route}
 	 */
-	public ArrayList<ice.rtk.utils.gpxparser.modal.Route> getRoutes() {
+	public ArrayList<ice.rtk.Utils.gpxparser.modal.Route> getRoutes() {
 		return this.routes;
 	}
 
 	/**
 	 * Getter for the list of Tracks from a gpx objecty
 	 *
-	 * @return a HashSet of {@link ice.rtk.utils.gpxparser.modal.Track}
+	 * @return a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Track}
 	 */
-	public ArrayList<ice.rtk.utils.gpxparser.modal.Track> getTracks() {
+	public ArrayList<ice.rtk.Utils.gpxparser.modal.Track> getTracks() {
 		return this.tracks;
 	}
 
@@ -114,9 +114,9 @@ public class GPX extends Extension {
 	/**
 	 * Getter for the list of waypoints from a gpx objecty
 	 *
-	 * @return a HashSet of {@link ice.rtk.utils.gpxparser.modal.Waypoint}
+	 * @return a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Waypoint}
 	 */
-	public ArrayList<ice.rtk.utils.gpxparser.modal.Waypoint> getWaypoints() {
+	public ArrayList<ice.rtk.Utils.gpxparser.modal.Waypoint> getWaypoints() {
 		return this.waypoints;
 	}
 
@@ -135,9 +135,9 @@ public class GPX extends Extension {
 	 * Setter for the list of routes from a gpx object
 	 *
 	 * @param routes
-	 *            a HashSet of {@link ice.rtk.utils.gpxparser.modal.Route}
+	 *            a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Route}
 	 */
-	public void setRoutes(ArrayList<ice.rtk.utils.gpxparser.modal.Route> routes) {
+	public void setRoutes(ArrayList<ice.rtk.Utils.gpxparser.modal.Route> routes) {
 		this.routes = routes;
 	}
 
@@ -145,9 +145,9 @@ public class GPX extends Extension {
 	 * Setter for the list of tracks from a gpx object
 	 *
 	 * @param tracks
-	 *            a HashSet of {@link ice.rtk.utils.gpxparser.modal.Track}
+	 *            a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Track}
 	 */
-	public void setTracks(ArrayList<ice.rtk.utils.gpxparser.modal.Track> tracks) {
+	public void setTracks(ArrayList<ice.rtk.Utils.gpxparser.modal.Track> tracks) {
 		this.tracks = tracks;
 	}
 
@@ -155,17 +155,17 @@ public class GPX extends Extension {
 	 * Setter for the list of waypoints from a gpx object
 	 *
 	 * @param waypoints
-	 *            a HashSet of {@link ice.rtk.utils.gpxparser.modal.Waypoint}
+	 *            a HashSet of {@link ice.rtk.Utils.gpxparser.modal.Waypoint}
 	 */
-	public void setWaypoints(ArrayList<ice.rtk.utils.gpxparser.modal.Waypoint> waypoints) {
+	public void setWaypoints(ArrayList<ice.rtk.Utils.gpxparser.modal.Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}
 
-	public ice.rtk.utils.gpxparser.modal.Metadata getMetadata() {
+	public ice.rtk.Utils.gpxparser.modal.Metadata getMetadata() {
 		return metadata;
 	}
 
-	public void setMetadata(ice.rtk.utils.gpxparser.modal.Metadata metadata) {
+	public void setMetadata(ice.rtk.Utils.gpxparser.modal.Metadata metadata) {
 		this.metadata = metadata;
 	}
 

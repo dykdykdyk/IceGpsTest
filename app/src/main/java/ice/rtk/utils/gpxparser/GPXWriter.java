@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser;
+package ice.rtk.Utils.gpxparser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -16,13 +16,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import ice.rtk.utils.gpxparser.modal.Extension;
-import ice.rtk.utils.gpxparser.modal.Metadata;
-import ice.rtk.utils.gpxparser.modal.TrackSegment;
+import ice.rtk.Utils.gpxparser.modal.Extension;
+import ice.rtk.Utils.gpxparser.modal.Metadata;
+import ice.rtk.Utils.gpxparser.modal.TrackSegment;
 
 public class GPXWriter extends BaseGPX {
 
-	public void writeGPX(ice.rtk.utils.gpxparser.modal.GPX gpx, OutputStream out) throws ParserConfigurationException, TransformerException {
+	public void writeGPX(ice.rtk.Utils.gpxparser.modal.GPX gpx, OutputStream out) throws ParserConfigurationException, TransformerException {
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = builder.newDocument();
 		Node gpxNode = doc.createElement(GPXConstants.NODE_GPX);
@@ -42,18 +42,18 @@ public class GPXWriter extends BaseGPX {
 			this.addMetadataToNode(gpx.getMetadata(), gpxNode, doc);
 		}
 		if (gpx.getWaypoints() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Waypoint wp : gpx.getWaypoints()) {
+			for (ice.rtk.Utils.gpxparser.modal.Waypoint wp : gpx.getWaypoints()) {
 				this.addWaypointToNode(GPXConstants.NODE_WPT, wp, gpxNode, doc);
 			}
 		}
 		if (gpx.getRoutes() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Route route : gpx.getRoutes()) {
+			for (ice.rtk.Utils.gpxparser.modal.Route route : gpx.getRoutes()) {
 				this.addRouteToNode(route, gpxNode, doc);
 			}
 		}
 
 		if (gpx.getTracks() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Track track : gpx.getTracks()) {
+			for (ice.rtk.Utils.gpxparser.modal.Track track : gpx.getTracks()) {
 				this.addTrackToNode(track, gpxNode, doc);
 			}
 		}
@@ -69,7 +69,7 @@ public class GPXWriter extends BaseGPX {
 		transformer.transform(source, result);
 	}
 
-	private void addTrackToNode(ice.rtk.utils.gpxparser.modal.Track trk, Node n, Document doc) {
+	private void addTrackToNode(ice.rtk.Utils.gpxparser.modal.Track trk, Node n, Document doc) {
 		Node trkNode = doc.createElement(GPXConstants.NODE_TRK);
 
 		if (trk.getName() != null) {
@@ -93,7 +93,7 @@ public class GPXWriter extends BaseGPX {
 			trkNode.appendChild(node);
 		}
 		if (trk.getLinks() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Link l : trk.getLinks()) {
+			for (ice.rtk.Utils.gpxparser.modal.Link l : trk.getLinks()) {
 				this.addLinkToNode(l, trkNode, doc);
 			}
 		}
@@ -120,7 +120,7 @@ public class GPXWriter extends BaseGPX {
 	private void addTrackSegmentToNode(TrackSegment ts, Node n, Document doc) {
 		Node tsNode = doc.createElement(GPXConstants.NODE_TRKSEG);
 
-		for (ice.rtk.utils.gpxparser.modal.Waypoint wp : ts.getWaypoints()) {
+		for (ice.rtk.Utils.gpxparser.modal.Waypoint wp : ts.getWaypoints()) {
 			this.addWaypointToNode(GPXConstants.NODE_TRKPT, wp, tsNode, doc);
 		}
 		this.addExtensionToNode(ts, tsNode, doc);
@@ -129,7 +129,7 @@ public class GPXWriter extends BaseGPX {
 
 	}
 
-	private void addRouteToNode(ice.rtk.utils.gpxparser.modal.Route rte, Node gpxNode, Document doc) {
+	private void addRouteToNode(ice.rtk.Utils.gpxparser.modal.Route rte, Node gpxNode, Document doc) {
 		Node rteNode = doc.createElement(GPXConstants.NODE_RTE);
 
 		if (rte.getName() != null) {
@@ -153,7 +153,7 @@ public class GPXWriter extends BaseGPX {
 			rteNode.appendChild(node);
 		}
 		if (rte.getLinks() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Link l : rte.getLinks()) {
+			for (ice.rtk.Utils.gpxparser.modal.Link l : rte.getLinks()) {
 				this.addLinkToNode(l, rteNode, doc);
 			}
 		}
@@ -170,7 +170,7 @@ public class GPXWriter extends BaseGPX {
 		this.addExtensionToNode(rte, rteNode, doc);
 
 		if (rte.getRoutePoints() != null) {
-			Iterator<ice.rtk.utils.gpxparser.modal.Waypoint> it = rte.getRoutePoints().iterator();
+			Iterator<ice.rtk.Utils.gpxparser.modal.Waypoint> it = rte.getRoutePoints().iterator();
 			while (it.hasNext()) {
 				this.addWaypointToNode(GPXConstants.NODE_RTEPT, it.next(), rteNode, doc);
 			}
@@ -178,7 +178,7 @@ public class GPXWriter extends BaseGPX {
 		gpxNode.appendChild(rteNode);
 	}
 
-	private void addWaypointToNode(String tag, ice.rtk.utils.gpxparser.modal.Waypoint wpt, Node n, Document doc) {
+	private void addWaypointToNode(String tag, ice.rtk.Utils.gpxparser.modal.Waypoint wpt, Node n, Document doc) {
 		Node wptNode = doc.createElement(tag);
 		NamedNodeMap attrs = wptNode.getAttributes();
 		if (wpt.getLatitude() != 0) {
@@ -232,7 +232,7 @@ public class GPXWriter extends BaseGPX {
 			wptNode.appendChild(node);
 		}
 		if (wpt.getLinks() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Link l : wpt.getLinks()) {
+			for (ice.rtk.Utils.gpxparser.modal.Link l : wpt.getLinks()) {
 				this.addLinkToNode(l, wptNode, doc);
 			}
 		}
@@ -309,7 +309,7 @@ public class GPXWriter extends BaseGPX {
 		}
 
 		if (m.getLinks() != null) {
-			for (ice.rtk.utils.gpxparser.modal.Link l : m.getLinks()) {
+			for (ice.rtk.Utils.gpxparser.modal.Link l : m.getLinks()) {
 				this.addLinkToNode(l, matadataNode, doc);
 			}
 		}
@@ -335,7 +335,7 @@ public class GPXWriter extends BaseGPX {
 		n.appendChild(matadataNode);
 	}
 
-	private void addBoundsToNode(ice.rtk.utils.gpxparser.modal.Bounds bounds, Node n, Document doc) {
+	private void addBoundsToNode(ice.rtk.Utils.gpxparser.modal.Bounds bounds, Node n, Document doc) {
 		Node bonundsNode = doc.createElement(GPXConstants.NODE_BOUNDS);
 		NamedNodeMap attributes = bonundsNode.getAttributes();
 
@@ -356,7 +356,7 @@ public class GPXWriter extends BaseGPX {
 		attributes.setNamedItem(node);
 	}
 
-	private void addCopyrightToNode(ice.rtk.utils.gpxparser.modal.Copyright copyright, Node n, Document doc) {
+	private void addCopyrightToNode(ice.rtk.Utils.gpxparser.modal.Copyright copyright, Node n, Document doc) {
 		Node copyrightNode = doc.createElement(GPXConstants.NODE_COPYRIGHT);
 		NamedNodeMap attributes = copyrightNode.getAttributes();
 		if (copyright.getAuthor() != null) {
@@ -380,7 +380,7 @@ public class GPXWriter extends BaseGPX {
 
 	}
 
-	private void addAuthorToNode(ice.rtk.utils.gpxparser.modal.Person author, Node n, Document doc) {
+	private void addAuthorToNode(ice.rtk.Utils.gpxparser.modal.Person author, Node n, Document doc) {
 		Node authorNode = doc.createElement(GPXConstants.NODE_AUTHOR);
 		if (author.getName() != null) {
 			Node node = doc.createElement(GPXConstants.NODE_NAME);
@@ -397,7 +397,7 @@ public class GPXWriter extends BaseGPX {
 		n.appendChild(authorNode);
 	}
 
-	private void addLinkToNode(ice.rtk.utils.gpxparser.modal.Link link, Node n, Document doc) {
+	private void addLinkToNode(ice.rtk.Utils.gpxparser.modal.Link link, Node n, Document doc) {
 		Node linkNode = doc.createElement(GPXConstants.NODE_LINK);
 		NamedNodeMap attributes = linkNode.getAttributes();
 		if (link.getHref() != null) {
@@ -420,7 +420,7 @@ public class GPXWriter extends BaseGPX {
 		n.appendChild(linkNode);
 	}
 
-	private void addEmailToNode(ice.rtk.utils.gpxparser.modal.Email email, Node n, Document doc) {
+	private void addEmailToNode(ice.rtk.Utils.gpxparser.modal.Email email, Node n, Document doc) {
 		Node emailNode = doc.createElement(GPXConstants.NODE_EMAIL);
 		NamedNodeMap attributes = emailNode.getAttributes();
 		if (email.getId() != null) {
@@ -439,7 +439,7 @@ public class GPXWriter extends BaseGPX {
 	private void addExtensionToNode(Extension e, Node n, Document doc) {
 		if (e.getExtensionsParsed() > 0) {
 			Node node = doc.createElement(GPXConstants.NODE_EXTENSIONS);
-			for (ice.rtk.utils.gpxparser.extension.IExtensionParser parser : this.extensionParsers) {
+			for (ice.rtk.Utils.gpxparser.extension.IExtensionParser parser : this.extensionParsers) {
 				parser.writeExtensions(node, doc);
 			}
 			n.appendChild(node);

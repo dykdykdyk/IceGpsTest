@@ -1,5 +1,5 @@
 
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,10 +9,10 @@ public class Track extends Extension {
     private String comment;
     private String description;
     private String src;
-    private HashSet<ice.rtk.utils.gpxparser.modal.Link> links;
+    private HashSet<ice.rtk.Utils.gpxparser.modal.Link> links;
     private int number;
     private String type;
-    private ArrayList<ice.rtk.utils.gpxparser.modal.TrackSegment> trackSegments;
+    private ArrayList<ice.rtk.Utils.gpxparser.modal.TrackSegment> trackSegments;
 
     /**
      * Returns the name of this track.
@@ -122,15 +122,15 @@ public class Track extends Extension {
         this.type = type;
     }
 
-    public HashSet<ice.rtk.utils.gpxparser.modal.Link> getLinks() {
+    public HashSet<ice.rtk.Utils.gpxparser.modal.Link> getLinks() {
         return links;
     }
 
-    public void setLinks(HashSet<ice.rtk.utils.gpxparser.modal.Link> links) {
+    public void setLinks(HashSet<ice.rtk.Utils.gpxparser.modal.Link> links) {
         this.links = links;
     }
 
-    public void addLink(ice.rtk.utils.gpxparser.modal.Link link) {
+    public void addLink(ice.rtk.Utils.gpxparser.modal.Link link) {
         if (links == null) {
             links = new HashSet<>();
         }
@@ -148,15 +148,15 @@ public class Track extends Extension {
         return sb.toString();
     }
 
-    public ArrayList<ice.rtk.utils.gpxparser.modal.TrackSegment> getTrackSegments() {
+    public ArrayList<ice.rtk.Utils.gpxparser.modal.TrackSegment> getTrackSegments() {
         return trackSegments;
     }
 
-    public void setTrackSegments(ArrayList<ice.rtk.utils.gpxparser.modal.TrackSegment> trackSegments) {
+    public void setTrackSegments(ArrayList<ice.rtk.Utils.gpxparser.modal.TrackSegment> trackSegments) {
         this.trackSegments = trackSegments;
     }
 
-    public void addTrackSegment(ice.rtk.utils.gpxparser.modal.TrackSegment trackSegment) {
+    public void addTrackSegment(ice.rtk.Utils.gpxparser.modal.TrackSegment trackSegment) {
         if (trackSegments == null) {
             trackSegments = new ArrayList<>();
         }

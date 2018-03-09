@@ -1,5 +1,5 @@
 
-package ice.rtk.utils.gpxparser.type;
+package ice.rtk.Utils.gpxparser.type;
 
 /**
  * <p>Type of GPS fix. Value comes from list: {'none'|'2d'|'3d'|'dgps'|'pps'}</p>

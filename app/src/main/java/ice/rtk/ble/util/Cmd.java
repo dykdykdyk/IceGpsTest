@@ -1,4 +1,4 @@
-package ice.rtk.ble.util;
+package ice.rtk.ble.Util;
 
 /**
  * Created by 111 on 2017/11/22.

@@ -15,7 +15,7 @@ import ice.rtk.R;
  * Created by Administrator on 2018/1/23.
  */
 
-public class PopuwindowsUtil {
+public class popuwindowsUtil {
 
     private void showPopupWindow(final Activity activity) {
         //设置contentView

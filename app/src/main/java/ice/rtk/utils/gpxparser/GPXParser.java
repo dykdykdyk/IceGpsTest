@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser;
+package ice.rtk.Utils.gpxparser;
 
 import android.util.Log;
 
@@ -16,17 +16,17 @@ import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import ice.rtk.utils.LogUtil;
-import ice.rtk.utils.gpxparser.extension.IExtensionParser;
-import ice.rtk.utils.gpxparser.modal.Bounds;
-import ice.rtk.utils.gpxparser.modal.Email;
-import ice.rtk.utils.gpxparser.modal.GPX;
-import ice.rtk.utils.gpxparser.modal.Link;
-import ice.rtk.utils.gpxparser.modal.Metadata;
-import ice.rtk.utils.gpxparser.modal.Route;
-import ice.rtk.utils.gpxparser.modal.Track;
-import ice.rtk.utils.gpxparser.modal.TrackSegment;
-import ice.rtk.utils.gpxparser.modal.Waypoint;
+import ice.rtk.Utils.LogUtil;
+import ice.rtk.Utils.gpxparser.extension.IExtensionParser;
+import ice.rtk.Utils.gpxparser.modal.Bounds;
+import ice.rtk.Utils.gpxparser.modal.Email;
+import ice.rtk.Utils.gpxparser.modal.GPX;
+import ice.rtk.Utils.gpxparser.modal.Link;
+import ice.rtk.Utils.gpxparser.modal.Metadata;
+import ice.rtk.Utils.gpxparser.modal.Route;
+import ice.rtk.Utils.gpxparser.modal.Track;
+import ice.rtk.Utils.gpxparser.modal.TrackSegment;
+import ice.rtk.Utils.gpxparser.modal.Waypoint;
 
 
 /**
@@ -63,16 +63,16 @@ public class GPXParser extends BaseGPX {
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = builder.parse(in);
 		Node firstChild = doc.getFirstChild();
-		if (firstChild != null && ice.rtk.utils.gpxparser.GPXConstants.NODE_GPX.equals(firstChild.getNodeName())) {
+		if (firstChild != null && ice.rtk.Utils.gpxparser.GPXConstants.NODE_GPX.equals(firstChild.getNodeName())) {
 			GPX gpx = new GPX();
 
 			NamedNodeMap attrs = firstChild.getAttributes();
 
 			for (int idx = 0; idx < attrs.getLength(); idx++) {
 				Node attr = attrs.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_VERSION.equals(attr.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_VERSION.equals(attr.getNodeName())) {
 					gpx.setVersion(attr.getNodeValue());
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_CREATOR.equals(attr.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_CREATOR.equals(attr.getNodeName())) {
 					gpx.setCreator(attr.getNodeValue());
 				}
 			}
@@ -80,27 +80,27 @@ public class GPXParser extends BaseGPX {
 			NodeList nodes = firstChild.getChildNodes();
 			for (int idx = 0; idx < nodes.getLength(); idx++) {
 				Node currentNode = nodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_METADATA.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_METADATA.equals(currentNode.getNodeName())) {
 					Metadata m = this.parseMetadata(currentNode);
 					if (m != null) {
 						gpx.setMetadata(m);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_WPT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_WPT.equals(currentNode.getNodeName())) {
 					Waypoint w = this.parseWaypoint(currentNode);
 					if (w != null) {
 						gpx.addWaypoint(w);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_RTE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_RTE.equals(currentNode.getNodeName())) {
 					Route rte = this.parseRoute(currentNode);
 					if (rte != null) {
 						gpx.addRoute(rte);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TRK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TRK.equals(currentNode.getNodeName())) {
 					Track trk = this.parseTrack(currentNode);
 					if (trk != null) {
 						gpx.addTrack(trk);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					for (IExtensionParser parser : this.extensionParsers) {
 						Object data = parser.parseExtensions(currentNode);
 						gpx.addExtensionData(parser.getId(), data);
@@ -124,35 +124,35 @@ public class GPXParser extends BaseGPX {
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
 					m.setName(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
 					m.setDesc(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_AUTHOR.equals(currentNode.getNodeName())) {
-					ice.rtk.utils.gpxparser.modal.Person author = this.parsePerson(currentNode);
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_AUTHOR.equals(currentNode.getNodeName())) {
+					ice.rtk.Utils.gpxparser.modal.Person author = this.parsePerson(currentNode);
 					if (author != null) {
 						m.setAuthor(author);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_COPYRIGHT.equals(currentNode.getNodeName())) {
-					ice.rtk.utils.gpxparser.modal.Copyright copyright = this.parseCopyright(currentNode);
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_COPYRIGHT.equals(currentNode.getNodeName())) {
+					ice.rtk.Utils.gpxparser.modal.Copyright copyright = this.parseCopyright(currentNode);
 					if (copyright != null) {
 						m.setCopyright(copyright);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
 					Link link = this.parseLink(currentNode);
 					if (link != null) {
 						m.addLink(link);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TIME.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TIME.equals(currentNode.getNodeName())) {
 					m.setTime(this.getNodeValueAsDate(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_KEYWORDS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_KEYWORDS.equals(currentNode.getNodeName())) {
 					m.setKeywords(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_BOUNDS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_BOUNDS.equals(currentNode.getNodeName())) {
 					Bounds bounds = this.parseBounds(currentNode);
 					if (bounds != null) {
 						m.setBounds(bounds);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					Iterator<IExtensionParser> it = this.extensionParsers.iterator();
 					while (it.hasNext()) {
 						IExtensionParser parser = it.next();
@@ -165,24 +165,24 @@ public class GPXParser extends BaseGPX {
 		return m;
 	}
 
-	private ice.rtk.utils.gpxparser.modal.Person parsePerson(Node node) {
+	private ice.rtk.Utils.gpxparser.modal.Person parsePerson(Node node) {
 		if (node == null) {
 			return null;
 		}
 
-		ice.rtk.utils.gpxparser.modal.Person p = new ice.rtk.utils.gpxparser.modal.Person();
+		ice.rtk.Utils.gpxparser.modal.Person p = new ice.rtk.Utils.gpxparser.modal.Person();
 		NodeList childNodes = node.getChildNodes();
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
 					p.setName(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EMAIL.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EMAIL.equals(currentNode.getNodeName())) {
 					Email email = this.parseEmail(currentNode);
 					if (email != null) {
 						p.setEmail(email);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
 					Link link = this.parseLink(currentNode);
 					if (link != null) {
 						p.setLink(link);
@@ -194,18 +194,18 @@ public class GPXParser extends BaseGPX {
 		return p;
 	}
 
-	private ice.rtk.utils.gpxparser.modal.Copyright parseCopyright(Node node) {
+	private ice.rtk.Utils.gpxparser.modal.Copyright parseCopyright(Node node) {
 		if (node == null) {
 			return null;
 		}
 
-		ice.rtk.utils.gpxparser.modal.Copyright c = new ice.rtk.utils.gpxparser.modal.Copyright(null);
+		ice.rtk.Utils.gpxparser.modal.Copyright c = new ice.rtk.Utils.gpxparser.modal.Copyright(null);
 
 		NamedNodeMap attrs = node.getAttributes();
 
 		for (int idx = 0; idx < attrs.getLength(); idx++) {
 			Node attr = attrs.item(idx);
-			if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_AUTHOR.equals(attr.getNodeName())) {
+			if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_AUTHOR.equals(attr.getNodeName())) {
 				c.setAuthor(attr.getNodeValue());
 			}
 		}
@@ -214,9 +214,9 @@ public class GPXParser extends BaseGPX {
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_YEAR.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_YEAR.equals(currentNode.getNodeName())) {
 					c.setYear(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LICENSE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LICENSE.equals(currentNode.getNodeName())) {
 					c.setLicense(this.getNodeValueAsString(currentNode));
 				}
 			}
@@ -235,7 +235,7 @@ public class GPXParser extends BaseGPX {
 
 		for (int idx = 0; idx < attrs.getLength(); idx++) {
 			Node attr = attrs.item(idx);
-			if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_HREF.equals(attr.getNodeName())) {
+			if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_HREF.equals(attr.getNodeName())) {
 				l.setHref(attr.getNodeValue());
 			}
 		}
@@ -244,9 +244,9 @@ public class GPXParser extends BaseGPX {
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TEXT.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TEXT.equals(currentNode.getNodeName())) {
 					l.setText(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
 					l.setType(this.getNodeValueAsString(currentNode));
 				}
 			}
@@ -266,13 +266,13 @@ public class GPXParser extends BaseGPX {
 
 		for (int idx = 0; idx < attrs.getLength(); idx++) {
 			Node attr = attrs.item(idx);
-			if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_MINLAT.equals(attr.getNodeName())) {
+			if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_MINLAT.equals(attr.getNodeName())) {
 				b.setMinLat(Double.parseDouble(attr.getNodeValue()));
-			} else if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_MINLON.equals(attr.getNodeName())) {
+			} else if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_MINLON.equals(attr.getNodeName())) {
 				b.setMinLon(Double.parseDouble(attr.getNodeValue()));
-			} else if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_MAXLAT.equals(attr.getNodeName())) {
+			} else if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_MAXLAT.equals(attr.getNodeName())) {
 				b.setMaxLat(Double.parseDouble(attr.getNodeValue()));
-			} else if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_MAXLON.equals(attr.getNodeName())) {
+			} else if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_MAXLON.equals(attr.getNodeName())) {
 				b.setMaxLon(Double.parseDouble(attr.getNodeValue()));
 			}
 		}
@@ -290,9 +290,9 @@ public class GPXParser extends BaseGPX {
 		NamedNodeMap attrs = node.getAttributes();
 		for (int idx = 0; idx < attrs.getLength(); idx++) {
 			Node attr = attrs.item(idx);
-			if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_ID.equals(attr.getNodeName())) {
+			if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_ID.equals(attr.getNodeName())) {
 				e.setId(attr.getNodeValue());
-			} else if (ice.rtk.utils.gpxparser.GPXConstants.ATTR_DOMAIN.equals(attr.getNodeName())) {
+			} else if (ice.rtk.Utils.gpxparser.GPXConstants.ATTR_DOMAIN.equals(attr.getNodeName())) {
 				e.setDomain(attr.getNodeValue());
 			}
 		}
@@ -307,7 +307,7 @@ public class GPXParser extends BaseGPX {
 		Waypoint w = new Waypoint(0, 0);
 		NamedNodeMap attrs = node.getAttributes();
 		// check for lat attribute
-		Node latNode = attrs.getNamedItem(ice.rtk.utils.gpxparser.GPXConstants.ATTR_LAT);
+		Node latNode = attrs.getNamedItem(ice.rtk.Utils.gpxparser.GPXConstants.ATTR_LAT);
 		if (latNode != null) {
 			Double latVal = null;
 			latVal = Double.parseDouble(latNode.getNodeValue());
@@ -317,7 +317,7 @@ public class GPXParser extends BaseGPX {
 			throw new Exception("no lat value in waypoint data.");
 		}
 		// check for lon attribute
-		Node lonNode = attrs.getNamedItem(ice.rtk.utils.gpxparser.GPXConstants.ATTR_LON);
+		Node lonNode = attrs.getNamedItem(ice.rtk.Utils.gpxparser.GPXConstants.ATTR_LON);
 		if (lonNode != null) {
 			Double lonVal = Double.parseDouble(lonNode.getNodeValue());
 			w.setLongitude(lonVal);
@@ -329,46 +329,46 @@ public class GPXParser extends BaseGPX {
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_ELE.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_ELE.equals(currentNode.getNodeName())) {
 					w.setElevation(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TIME.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TIME.equals(currentNode.getNodeName())) {
 					w.setTime(this.getNodeValueAsDate(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_MAGVAR.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_MAGVAR.equals(currentNode.getNodeName())) {
 					w.setMagneticVariation(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_GEOIDHEIGHT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_GEOIDHEIGHT.equals(currentNode.getNodeName())) {
 					w.setGeoIdHeight(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
 					w.setName(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
 					w.setComment(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
 					w.setDescription(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
 					w.setSrc(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
 					Link link = this.parseLink(currentNode);
 					if (link != null) {
 						w.addLink(link);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_SYM.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_SYM.equals(currentNode.getNodeName())) {
 					w.setSym(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
 					w.setType(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_FIX.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_FIX.equals(currentNode.getNodeName())) {
 					w.setFix(this.getNodeValueAsFixType(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_SAT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_SAT.equals(currentNode.getNodeName())) {
 					w.setSat(this.getNodeValueAsInteger(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_HDOP.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_HDOP.equals(currentNode.getNodeName())) {
 					w.setHdop(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_VDOP.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_VDOP.equals(currentNode.getNodeName())) {
 					w.setVdop(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_PDOP.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_PDOP.equals(currentNode.getNodeName())) {
 					w.setPdop(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_AGEOFGPSDATA.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_AGEOFGPSDATA.equals(currentNode.getNodeName())) {
 					w.setAgeOfGPSData(this.getNodeValueAsDouble(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_DGPSID.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_DGPSID.equals(currentNode.getNodeName())) {
 					w.setdGpsStationId(this.getNodeValueAsInteger(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					Iterator<IExtensionParser> it = this.extensionParsers.iterator();
 					while (it.hasNext()) {
 						IExtensionParser parser = it.next();
@@ -391,24 +391,24 @@ public class GPXParser extends BaseGPX {
 		if (nodes != null) {
 			for (int idx = 0; idx < nodes.getLength(); idx++) {
 				Node currentNode = nodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
 					rte.setName(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
 					rte.setComment(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
 					rte.setDescription(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
 					rte.setSrc(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
 					Link link = this.parseLink(currentNode);
 					if (link != null) {
 						rte.addLink(link);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NUMBER.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NUMBER.equals(currentNode.getNodeName())) {
 					rte.setNumber(this.getNodeValueAsInteger(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
 					rte.setType(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					Iterator<IExtensionParser> it = this.extensionParsers.iterator();
 					while (it.hasNext()) {
 						while (it.hasNext()) {
@@ -417,7 +417,7 @@ public class GPXParser extends BaseGPX {
 							rte.addExtensionData(parser.getId(), data);
 						}
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_RTEPT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_RTEPT.equals(currentNode.getNodeName())) {
 					Waypoint wp = this.parseWaypoint(currentNode);
 					if (wp != null) {
 						rte.addRoutePoint(wp);
@@ -438,24 +438,24 @@ public class GPXParser extends BaseGPX {
 		if (nodes != null) {
 			for (int idx = 0; idx < nodes.getLength(); idx++) {
 				Node currentNode = nodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NAME.equals(currentNode.getNodeName())) {
 					trk.setName(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_CMT.equals(currentNode.getNodeName())) {
 					trk.setComment(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_DESC.equals(currentNode.getNodeName())) {
 					trk.setDescription(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_SRC.equals(currentNode.getNodeName())) {
 					trk.setSrc(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_LINK.equals(currentNode.getNodeName())) {
 					Link link = this.parseLink(currentNode);
 					if (link != null) {
 						trk.addLink(link);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_NUMBER.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_NUMBER.equals(currentNode.getNodeName())) {
 					trk.setNumber(this.getNodeValueAsInteger(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TYPE.equals(currentNode.getNodeName())) {
 					trk.setType(this.getNodeValueAsString(currentNode));
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					Iterator<IExtensionParser> it = this.extensionParsers.iterator();
 					while (it.hasNext()) {
 						while (it.hasNext()) {
@@ -464,7 +464,7 @@ public class GPXParser extends BaseGPX {
 							trk.addExtensionData(parser.getId(), data);
 						}
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TRKSEG.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TRKSEG.equals(currentNode.getNodeName())) {
 					TrackSegment trackSeg = this.parseTrackSegment(currentNode);
 					if (trackSeg != null) {
 						trk.addTrackSegment(trackSeg);
@@ -486,12 +486,12 @@ public class GPXParser extends BaseGPX {
 		if (childNodes != null) {
 			for (int idx = 0; idx < childNodes.getLength(); idx++) {
 				Node currentNode = childNodes.item(idx);
-				if (ice.rtk.utils.gpxparser.GPXConstants.NODE_TRKPT.equals(currentNode.getNodeName())) {
+				if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_TRKPT.equals(currentNode.getNodeName())) {
 					Waypoint w = this.parseWaypoint(currentNode);
 					if (w != null) {
 						ts.addWaypoint(w);
 					}
-				} else if (ice.rtk.utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
+				} else if (ice.rtk.Utils.gpxparser.GPXConstants.NODE_EXTENSIONS.equals(currentNode.getNodeName())) {
 					Iterator<IExtensionParser> it = this.extensionParsers.iterator();
 					while (it.hasNext()) {
 						while (it.hasNext()) {
@@ -526,8 +526,8 @@ public class GPXParser extends BaseGPX {
 		return Double.parseDouble(node.getFirstChild().getNodeValue());
 	}
 
-	private ice.rtk.utils.gpxparser.type.Fix getNodeValueAsFixType(Node node) {
-		return ice.rtk.utils.gpxparser.type.Fix.returnType(node.getFirstChild().getNodeValue());
+	private ice.rtk.Utils.gpxparser.type.Fix getNodeValueAsFixType(Node node) {
+		return ice.rtk.Utils.gpxparser.type.Fix.returnType(node.getFirstChild().getNodeValue());
 	}
 
 	private Integer getNodeValueAsInteger(Node node) {

@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 import java.util.Date;
 import java.util.HashSet;

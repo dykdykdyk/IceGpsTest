@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser.extension;
+package ice.rtk.Utils.gpxparser.extension;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

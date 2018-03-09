@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,13 +18,13 @@ public class Waypoint extends Extension {
 	private String comment;
 	private String description;
 	private String src;
-	private HashSet<ice.rtk.utils.gpxparser.modal.Link> links;
+	private HashSet<ice.rtk.Utils.gpxparser.modal.Link> links;
 	/**
 	 * Symbol
 	 */
 	private String sym;
 	private String type;
-	private ice.rtk.utils.gpxparser.type.Fix fix;
+	private ice.rtk.Utils.gpxparser.type.Fix fix;
 	private int sat;
 	/**
 	 * Horizontal dilution of precision.
@@ -95,9 +95,9 @@ public class Waypoint extends Extension {
 	/**
 	 * Returns the fix of this waypoint.
 	 *
-	 * @return A {@link ice.rtk.utils.gpxparser.type.Fix} representing the fix of this waypoint.
+	 * @return A {@link ice.rtk.Utils.gpxparser.type.Fix} representing the fix of this waypoint.
 	 */
-	public ice.rtk.utils.gpxparser.type.Fix getFix() {
+	public ice.rtk.Utils.gpxparser.type.Fix getFix() {
 		return this.fix;
 	}
 
@@ -276,9 +276,9 @@ public class Waypoint extends Extension {
 	 * Setter for waypoint fix property. This maps to &lt;fix&gt; tag value.
 	 *
 	 * @param fix
-	 *            a {@link ice.rtk.utils.gpxparser.type.Fix} representing the fix of this waypoint.
+	 *            a {@link ice.rtk.Utils.gpxparser.type.Fix} representing the fix of this waypoint.
 	 */
-	public void setFix(ice.rtk.utils.gpxparser.type.Fix fix) {
+	public void setFix(ice.rtk.Utils.gpxparser.type.Fix fix) {
 		this.fix = fix;
 	}
 
@@ -450,15 +450,15 @@ public class Waypoint extends Extension {
 		return sb.toString();
 	}
 
-	public HashSet<ice.rtk.utils.gpxparser.modal.Link> getLinks() {
+	public HashSet<ice.rtk.Utils.gpxparser.modal.Link> getLinks() {
 		return links;
 	}
 
-	public void setLinks(HashSet<ice.rtk.utils.gpxparser.modal.Link> links) {
+	public void setLinks(HashSet<ice.rtk.Utils.gpxparser.modal.Link> links) {
 		this.links = links;
 	}
 
-	public void addLink(ice.rtk.utils.gpxparser.modal.Link link) {
+	public void addLink(ice.rtk.Utils.gpxparser.modal.Link link) {
 		if (links == null) {
 			links = new HashSet<>();
 		}

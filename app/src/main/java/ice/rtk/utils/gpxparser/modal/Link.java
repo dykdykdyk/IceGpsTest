@@ -1,4 +1,4 @@
-package ice.rtk.utils.gpxparser.modal;
+package ice.rtk.Utils.gpxparser.modal;
 
 /**
  * Created by Himanshu on 7/5/2015.

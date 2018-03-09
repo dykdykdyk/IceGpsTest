@@ -36,14 +36,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import ice.rtk.R;
-import ice.rtk.utils.LogUtil;
-import ice.rtk.utils.popupwindow.CommonPopupWindow;
-import ice.rtk.utils.Util;
-import ice.rtk.utils.gpxparser.GPXParser;
-import ice.rtk.utils.gpxparser.modal.GPX;
-import ice.rtk.utils.gpxparser.modal.Route;
-import ice.rtk.utils.gpxparser.modal.Waypoint;
-import ice.rtk.view.activity.LinesLoftingActivity;
+import ice.rtk.Utils.LogUtil;
+import ice.rtk.Utils.PopupWindow.CommonPopupWindow;
+import ice.rtk.Utils.Util;
+import ice.rtk.Utils.gpxparser.GPXParser;
+import ice.rtk.Utils.gpxparser.modal.GPX;
+import ice.rtk.Utils.gpxparser.modal.Route;
+import ice.rtk.Utils.gpxparser.modal.Waypoint;
+import ice.rtk.view.LinesView.LinesActivity;
+import ice.rtk.view.PointView.PointActivity;
 import ice.rtk.view.base.BaseFragment;
 import ice.rtk.view.coordinate_data.Activity_Addpoint;
 import ice.rtk.view.coordinate_data.Point_List;
@@ -616,7 +617,7 @@ public class Fragment_Lines extends BaseFragment implements View.OnClickListener
                 break;
 
             case R.id.lofting_point:
-                Intent inten1 =new Intent(getActivity(), LinesLoftingActivity.class);
+                Intent inten1 =new Intent(getActivity(), LinesActivity.class);
                 inten1.putExtra(Util.DRAW_POINT_LAT, list.get(selece_position).getLat());
                 inten1.putExtra(Util.DRAW_POINT_LON,list.get(selece_position).getLon());
                 inten1.putExtra(Util.DRAW_POINT_ELE,list.get(selece_position).getEle());

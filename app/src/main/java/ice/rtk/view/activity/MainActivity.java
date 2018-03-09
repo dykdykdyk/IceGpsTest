@@ -20,7 +20,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ice.rtk.R;
-import ice.rtk.utils.Util;
+import ice.rtk.Utils.Util;
+import ice.rtk.view.LinesView.LinesActivity;
+import ice.rtk.view.PointView.PointActivity;
 import ice.rtk.view.base.BaseActivity;
 import ice.rtk.view.coordinate_data.Activity_Coordinate_data;
 import rx.functions.Action1;
@@ -71,10 +73,9 @@ public class MainActivity extends BaseActivity {
 
     void initData() {
         //图标
-        int icno[] = {R.drawable.ic_root_file_raw, R.drawable.ic_root_file_system, R.drawable.ic_root_file_data, R.drawable.bluetooth
-         ,R.drawable.bluetooth};
+        int icno[] = {R.drawable.ic_root_file_raw, R.drawable.ic_root_file_system, R.drawable.ic_root_file_data, R.drawable.bluetooth};
         //图标下的文字
-        String name[] = {"点放样", "线放样", "坐标数据", "蓝牙通信","航点功能"};
+        String name[] = {"点放样", "线放样", "坐标数据", "蓝牙通信"};
         dataList = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < icno.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -92,19 +93,16 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 switch(position){
                     case 0:
-                        startActivity(PointLoftingActivity.class);
+                        startActivity(PointActivity.class);
                         break;
                     case 1:
-                        startActivity(LinesLoftingActivity.class);
+                        startActivity(LinesActivity.class);
                         break;
                     case 2:
                         startActivity(Activity_Coordinate_data.class);
                         break;
                     case 3://blue
                         startActivity(BleActivity.class);
-                        break;
-                    case 4://航点功能
-//                        startActivity(MainActivity_PointFounction.class);
                         break;
                 }
             }
