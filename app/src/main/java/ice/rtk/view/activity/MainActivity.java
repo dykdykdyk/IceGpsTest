@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +46,19 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         initPermission();
         initData();
+
+        File file =new File(Environment.getExternalStorageDirectory().getPath() + "/" + Util.APP_SDCARD_PATH+"/ellips.dat");
+        try {
+            FileOutputStream fileOutputStream =new FileOutputStream(file);
+            try {
+                fileOutputStream.write("11111111111111111111111111111111111111111111111".getBytes());
+                fileOutputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initPermission() {
